@@ -28,9 +28,9 @@ class htif_t
  protected:
   virtual void reset() = 0;
 
-  virtual void read_chunk(addr_t taddr, size_t len, void* dst) = 0;
-  virtual void write_chunk(addr_t taddr, size_t len, const void* src) = 0;
-  virtual void clear_chunk(addr_t taddr, size_t len);
+  virtual void read_chunk(reg_t taddr, size_t len, void* dst) = 0;
+  virtual void write_chunk(reg_t taddr, size_t len, const void* src) = 0;
+  virtual void clear_chunk(reg_t taddr, size_t len);
 
   virtual size_t chunk_align() = 0;
   virtual size_t chunk_max_size() = 0;
@@ -49,10 +49,10 @@ class htif_t
   std::vector<std::string> hargs;
   std::vector<std::string> targs;
   std::string sig_file;
-  addr_t sig_addr; // torture
-  addr_t sig_len; // torture
-  addr_t tohost_addr;
-  addr_t fromhost_addr;
+  reg_t sig_addr; // torture
+  reg_t sig_len; // torture
+  reg_t tohost_addr;
+  reg_t fromhost_addr;
   int exitcode;
   bool stopped;
 

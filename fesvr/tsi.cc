@@ -28,7 +28,7 @@ tsi_t::~tsi_t(void)
 void tsi_t::reset()
 {
   uint32_t one = 1;
-  addr_t ipis[NHARTS_MAX];
+  reg_t ipis[NHARTS_MAX];
   int ncores = get_ipi_addrs(ipis);
 
   if (ncores == 0) {
@@ -40,7 +40,7 @@ void tsi_t::reset()
     write_chunk(ipis[i], sizeof(uint32_t), &one);
 }
 
-void tsi_t::push_addr(addr_t addr)
+void tsi_t::push_addr(reg_t addr)
 {
   for (int i = 0; i < SAI_ADDR_CHUNKS; i++) {
     in_data.push_back(addr & 0xffffffff);
@@ -48,7 +48,7 @@ void tsi_t::push_addr(addr_t addr)
   }
 }
 
-void tsi_t::push_len(addr_t len)
+void tsi_t::push_len(reg_t len)
 {
   for (int i = 0; i < SAI_LEN_CHUNKS; i++) {
     in_data.push_back(len & 0xffffffff);
@@ -56,7 +56,7 @@ void tsi_t::push_len(addr_t len)
   }
 }
 
-void tsi_t::read_chunk(addr_t taddr, size_t nbytes, void* dst)
+void tsi_t::read_chunk(reg_t taddr, size_t nbytes, void* dst)
 {
   uint32_t *result = static_cast<uint32_t*>(dst);
   size_t len = nbytes / sizeof(uint32_t);
@@ -73,7 +73,7 @@ void tsi_t::read_chunk(addr_t taddr, size_t nbytes, void* dst)
   }
 }
 
-void tsi_t::write_chunk(addr_t taddr, size_t nbytes, const void* src)
+void tsi_t::write_chunk(reg_t taddr, size_t nbytes, const void* src)
 {
   const uint32_t *src_data = static_cast<const uint32_t*>(src);
   size_t len = nbytes / sizeof(uint32_t);
@@ -112,7 +112,7 @@ void tsi_t::switch_to_target(void)
   target->switch_to();
 }
 
-int tsi_t::get_ipi_addrs(addr_t *ipis)
+int tsi_t::get_ipi_addrs(reg_t *ipis)
 {
   const char *cfgstr = config_string.c_str();
   query_result res;

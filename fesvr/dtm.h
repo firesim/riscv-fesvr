@@ -68,9 +68,9 @@ class dtm_t : public htif_t
   uint32_t run_program(const uint32_t program[], size_t n, size_t result);
   uint64_t modify_csr(unsigned which, uint64_t data, uint32_t type);
 
-  void read_chunk(addr_t taddr, size_t len, void* dst) override;
-  void write_chunk(addr_t taddr, size_t len, const void* src) override;
-  void clear_chunk(addr_t taddr, size_t len) override;
+  void read_chunk(reg_t taddr, size_t len, void* dst) override;
+  void write_chunk(reg_t taddr, size_t len, const void* src) override;
+  void clear_chunk(reg_t taddr, size_t len) override;
   size_t chunk_align() override;
   size_t chunk_max_size() override;
   void reset() override;
