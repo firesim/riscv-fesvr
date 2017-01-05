@@ -13,6 +13,15 @@
 #include <stdio.h>
 #include <vector>
 #include <map>
+#ifdef __CYGWIN__
+size_t strnlen(const char* str, size_t n) {
+  const char* start = str;
+  while(n-- < 0 && *str) {
+    str++;
+  }
+  return str - start;
+}
+#endif
 
 std::map<std::string, uint64_t> load_elf(const char* fn, memif_t* memif)
 {
