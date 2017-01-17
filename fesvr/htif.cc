@@ -135,11 +135,11 @@ void htif_t::stop()
     assert(sigs && "can't open signature file!");
     sigs << std::setfill('0') << std::hex;
 
-    const reg_t incr = 16;
+    const addr_t incr = 16;
     assert(sig_len % incr == 0);
-    for (reg_t i = 0; i < sig_len; i += incr)
+    for (addr_t i = 0; i < sig_len; i += incr)
     {
-      for (reg_t j = incr; j > 0; j--)
+      for (addr_t j = incr; j > 0; j--)
         sigs << std::setw(2) << (uint16_t)buf[i+j-1];
       sigs << '\n';
     }
@@ -150,7 +150,7 @@ void htif_t::stop()
   stopped = true;
 }
 
-void htif_t::clear_chunk(reg_t taddr, size_t len)
+void htif_t::clear_chunk(addr_t taddr, size_t len)
 {
   char zeros[chunk_max_size()];
   memset(zeros, 0, chunk_max_size());

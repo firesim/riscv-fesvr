@@ -6,7 +6,7 @@
 #include "memif.h"
 #include "htif.h"
 
-void memif_t::read(reg_t addr, size_t len, void* bytes)
+void memif_t::read(addr_t addr, size_t len, void* bytes)
 {
   size_t align = htif->chunk_align();
   if (len && (addr & (align-1)))
@@ -39,7 +39,7 @@ void memif_t::read(reg_t addr, size_t len, void* bytes)
     htif->read_chunk(addr + pos, std::min(htif->chunk_max_size(), len - pos), (char*)bytes + pos);
 }
 
-void memif_t::write(reg_t addr, size_t len, const void* bytes)
+void memif_t::write(addr_t addr, size_t len, const void* bytes)
 {
   size_t align = htif->chunk_align();
   if (len && (addr & (align-1)))
@@ -94,90 +94,90 @@ void memif_t::write(reg_t addr, size_t len, const void* bytes)
     throw std::runtime_error("misaligned address"); \
   this->write(addr, sizeof(val), &val)
 
-uint8_t memif_t::read_uint8(reg_t addr)
+uint8_t memif_t::read_uint8(addr_t addr)
 {
   uint8_t val;
   MEMIF_READ_FUNC;
 }
 
-int8_t memif_t::read_int8(reg_t addr)
+int8_t memif_t::read_int8(addr_t addr)
 {
   int8_t val;
   MEMIF_READ_FUNC;
 }
 
-void memif_t::write_uint8(reg_t addr, uint8_t val)
+void memif_t::write_uint8(addr_t addr, uint8_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-void memif_t::write_int8(reg_t addr, int8_t val)
+void memif_t::write_int8(addr_t addr, int8_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-uint16_t memif_t::read_uint16(reg_t addr)
+uint16_t memif_t::read_uint16(addr_t addr)
 {
   uint16_t val;
   MEMIF_READ_FUNC;
 }
 
-int16_t memif_t::read_int16(reg_t addr)
+int16_t memif_t::read_int16(addr_t addr)
 {
   int16_t val;
   MEMIF_READ_FUNC;
 }
 
-void memif_t::write_uint16(reg_t addr, uint16_t val)
+void memif_t::write_uint16(addr_t addr, uint16_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-void memif_t::write_int16(reg_t addr, int16_t val)
+void memif_t::write_int16(addr_t addr, int16_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-uint32_t memif_t::read_uint32(reg_t addr)
+uint32_t memif_t::read_uint32(addr_t addr)
 {
   uint32_t val;
   MEMIF_READ_FUNC;
 }
 
-int32_t memif_t::read_int32(reg_t addr)
+int32_t memif_t::read_int32(addr_t addr)
 {
   int32_t val;
   MEMIF_READ_FUNC;
 }
 
-void memif_t::write_uint32(reg_t addr, uint32_t val)
+void memif_t::write_uint32(addr_t addr, uint32_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-void memif_t::write_int32(reg_t addr, int32_t val)
+void memif_t::write_int32(addr_t addr, int32_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-uint64_t memif_t::read_uint64(reg_t addr)
+uint64_t memif_t::read_uint64(addr_t addr)
 {
   uint64_t val;
   MEMIF_READ_FUNC;
 }
 
-int64_t memif_t::read_int64(reg_t addr)
+int64_t memif_t::read_int64(addr_t addr)
 {
   int64_t val;
   MEMIF_READ_FUNC;
 }
 
-void memif_t::write_uint64(reg_t addr, uint64_t val)
+void memif_t::write_uint64(addr_t addr, uint64_t val)
 {
   MEMIF_WRITE_FUNC;
 }
 
-void memif_t::write_int64(reg_t addr, int64_t val)
+void memif_t::write_int64(addr_t addr, int64_t val)
 {
   MEMIF_WRITE_FUNC;
 }

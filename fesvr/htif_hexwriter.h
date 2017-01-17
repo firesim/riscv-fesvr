@@ -16,10 +16,10 @@ public:
 protected:
   size_t width;
   size_t depth;
-  std::map<reg_t,std::vector<char> > mem;
+  std::map<addr_t,std::vector<char> > mem;
 
-  void read_chunk(reg_t taddr, size_t len, void* dst);
-  void write_chunk(reg_t taddr, size_t len, const void* src);
+  void read_chunk(addr_t taddr, size_t len, void* dst);
+  void write_chunk(addr_t taddr, size_t len, const void* src);
 
   size_t chunk_max_size() { return width; }
   size_t chunk_align() { return width; }
