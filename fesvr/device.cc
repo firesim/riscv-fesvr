@@ -60,6 +60,7 @@ bcd_t::bcd_t()
 {
   register_command(0, std::bind(&bcd_t::handle_read, this, _1), "read");
   register_command(1, std::bind(&bcd_t::handle_write, this, _1), "write");
+  _started = false;
 }
 
 void bcd_t::handle_read(command_t cmd)
@@ -69,6 +70,7 @@ void bcd_t::handle_read(command_t cmd)
 
 void bcd_t::handle_write(command_t cmd)
 {
+  _started = true;
   canonical_terminal_t::write(cmd.payload());
   cmd.respond(0x100 | (uint8_t)cmd.payload());
 }

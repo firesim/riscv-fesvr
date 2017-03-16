@@ -63,12 +63,15 @@ class bcd_t : public device_t
   bcd_t();
   const char* identity() { return "bcd"; }
   void tick();
+  bool started() { return _started; }
 
  private:
   void handle_read(command_t cmd);
   void handle_write(command_t cmd);
 
   std::queue<command_t> pending_reads;
+
+  bool _started;
 };
 
 class disk_t : public device_t

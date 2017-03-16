@@ -25,6 +25,8 @@ class htif_t
   virtual memif_t& memif() { return mem; }
   virtual uint32_t num_cores();
 
+  bool bcd_started() { return bcd.started(); }
+
  protected:
   virtual void reset() = 0;
 
